@@ -14,9 +14,12 @@ namespace MouseCar
 		[SerializeField] private Transform _centerOfMass;
 		[SerializeField] private float engineTorque;
 		[SerializeField] private float brakeTorque;
+		[SerializeField, Range(0, 1)] private float brakeToReversePoint;
 		private float _throttle;
 		private float _brake;
+		private float _realBrake;
 		private float _steering;
+		private float _reverse;
 		private void Awake()
 		{
 			_rigidbody = GetComponent<Rigidbody>();
@@ -56,9 +59,16 @@ namespace MouseCar
 			
 			//brake should be 0 to like 0.5 up, then .5 to 1 back down
 			//then reverse throttle from .5 to 1 down.
-			LeftWheel.Collider.brakeTorque = _brake * brakeTorque;
-			RightWheel.Collider.brakeTorque = _brake * brakeTorque;
-			
+			_realBrake = 1-(Mathf.Abs(_brake - brakeToReversePoint)*(1/brakeToReversePoint));
+			LeftWheel.Collider.brakeTorque = _realBrake * brakeTorque;
+			RightWheel.Collider.brakeTorque = _realBrake * brakeTorque;
+			_reverse = Mathf.InverseLerp(brakeToReversePoint, 1, _brake);
+			if (_reverse > 0 && _throttle < 0.75f)
+			{
+				RightWheel.Collider.motorTorque = _reverse*0.75f*engineTorque;
+				LeftWheel.Collider.motorTorque = _reverse * 0.75f*engineTorque;
+			}
+
 			//Apply Steering
 			var s = _steering;//0.5 is straight.
 			LeftWheel.Collider.steerAngle = -Mathf.Lerp(-45, 45, s);
