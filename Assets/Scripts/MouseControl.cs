@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
 
 
 public class MouseControl : MonoBehaviour
 {
 	private Camera _camera;
-
+	public InputAction ClickInput;
 
 	private Vector2Int screenPos;
 	[DllImport("User32.dll")]
@@ -18,6 +19,7 @@ public class MouseControl : MonoBehaviour
 	private void Start()
 	{
 		_camera = Camera.main;
+		ClickInput.Enable();
 	}
 	
 	
@@ -31,7 +33,7 @@ public class MouseControl : MonoBehaviour
 		//https://github.com/elringus/unity-raw-input
 		
 		
-		if (Input.GetKeyDown(KeyCode.Space))
+		if (ClickInput.WasPerformedThisFrame())
 		{
 			Click();
 		}
