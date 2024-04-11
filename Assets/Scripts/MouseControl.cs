@@ -33,41 +33,44 @@ public class MouseControl : MonoBehaviour
 		//https://github.com/elringus/unity-raw-input
 		
 		
-		if (ClickInput.WasPerformedThisFrame())
+		if (ClickInput.WasPressedThisFrame())
 		{
-			Click();
+			INPUT down = new INPUT()
+			{
+				type = InputType.INPUT_MOUSE,
+				U = new InputUnion()
+				{
+					mi = new MOUSEINPUT()
+					{
+						dx = screenPos.x,
+						dy = screenPos.y,
+						dwFlags = MOUSEEVENTF.LEFTDOWN
+					}
+				}
+			};
+			Click(down);
+		}else if (ClickInput.WasReleasedThisFrame())
+		{
+			INPUT up = new INPUT()
+			{
+				type = InputType.INPUT_MOUSE,
+				U = new InputUnion()
+				{
+					mi = new MOUSEINPUT()
+					{
+						dx = screenPos.x,
+						dy = screenPos.y,
+						dwFlags = MOUSEEVENTF.LEFTUP
+					}
+				}
+			};
+			Click(up);
 		}
 	}
 
-	private void Click()
+	private void Click(INPUT input)
 	{
-		INPUT down = new INPUT()
-		{
-			type = InputType.INPUT_MOUSE,
-			U = new InputUnion()
-			{
-				mi = new MOUSEINPUT()
-				{
-					dx = screenPos.x,
-					dy = screenPos.y,
-					dwFlags = MOUSEEVENTF.LEFTDOWN
-				}
-			}
-		};
-		INPUT up = new INPUT()
-		{
-			type = InputType.INPUT_MOUSE,
-			U = new InputUnion()
-			{
-				mi = new MOUSEINPUT()
-				{
-					dx = screenPos.x,
-					dy = screenPos.y,
-					dwFlags = MOUSEEVENTF.LEFTUP
-				}
-			}
-		};
-		SendInput(2, new INPUT[] { down, up }, INPUT.Size);
+		SendInput(2, new INPUT[] { input }, INPUT.Size);
 	}
 
 	Vector2Int ScreenPosition()
