@@ -8,7 +8,8 @@ using UnityEngine.UIElements;
 public class MouseControl : MonoBehaviour
 {
 	private Camera _camera;
-	public InputAction ClickInput;
+	public InputActionReference LeftClickInput;
+	public InputActionReference RightClickInput;
 
 	private Vector2Int screenPos;
 	[DllImport("User32.dll")]
@@ -19,7 +20,8 @@ public class MouseControl : MonoBehaviour
 	private void Start()
 	{
 		_camera = Camera.main;
-		ClickInput.Enable();
+		LeftClickInput.action.Enable();
+		RightClickInput.action.Enable();
 	}
 	
 	
@@ -33,7 +35,7 @@ public class MouseControl : MonoBehaviour
 		//https://github.com/elringus/unity-raw-input
 		
 		
-		if (ClickInput.WasPressedThisFrame())
+		if (LeftClickInput.action.WasPressedThisFrame())
 		{
 			INPUT down = new INPUT()
 			{
@@ -49,7 +51,7 @@ public class MouseControl : MonoBehaviour
 				}
 			};
 			Click(down);
-		}else if (ClickInput.WasReleasedThisFrame())
+		}else if (LeftClickInput.action.WasReleasedThisFrame())
 		{
 			INPUT up = new INPUT()
 			{
@@ -61,6 +63,41 @@ public class MouseControl : MonoBehaviour
 						dx = screenPos.x,
 						dy = screenPos.y,
 						dwFlags = MOUSEEVENTF.LEFTUP
+					}
+				}
+			};
+			Click(up);
+		}
+		//right click
+		if (RightClickInput.action.WasPressedThisFrame())
+		{
+			INPUT down = new INPUT()
+			{
+				type = InputType.INPUT_MOUSE,
+				U = new InputUnion()
+				{
+					mi = new MOUSEINPUT()
+					{
+						dx = screenPos.x,
+						dy = screenPos.y,
+						dwFlags = MOUSEEVENTF.RIGHTUP
+					}
+				}
+			};
+			Click(down);
+		}
+		else if (RightClickInput.action.WasReleasedThisFrame())
+		{
+			INPUT up = new INPUT()
+			{
+				type = InputType.INPUT_MOUSE,
+				U = new InputUnion()
+				{
+					mi = new MOUSEINPUT()
+					{
+						dx = screenPos.x,
+						dy = screenPos.y,
+						dwFlags = MOUSEEVENTF.RIGHTUP
 					}
 				}
 			};

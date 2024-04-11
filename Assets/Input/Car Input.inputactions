@@ -1,0 +1,107 @@
+{
+    "name": "Car Input",
+    "maps": [
+        {
+            "name": "Driving",
+            "id": "5d4b2e9f-f00c-44b8-9224-6908ab049942",
+            "actions": [
+                {
+                    "name": "Gas",
+                    "type": "Value",
+                    "id": "651898c2-5f7a-4c31-9af0-669b846df958",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Brake",
+                    "type": "Value",
+                    "id": "02029601-595d-4e44-bcc9-d65f629548b9",
+                    "expectedControlType": "Analog",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Steering",
+                    "type": "Value",
+                    "id": "8938e422-b944-4465-b974-1a49d9f48113",
+                    "expectedControlType": "Analog",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "6b7f5063-0a55-465c-9f0d-a3b04e5c64b9",
+                    "path": "<DI_Thrustmaster TMX Racing Wheel>/RZ",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Gas",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "7724c302-292b-48aa-9b3f-b15a48f51629",
+                    "path": "<DI_Thrustmaster TMX Racing Wheel>/Y",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Brake",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "1D Axis",
+                    "id": "8cae036e-80c7-42bf-a4be-2efa189d1278",
+                    "path": "1DAxis",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Steering",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "negative",
+                    "id": "4d588777-eb02-4c68-8e7e-d9ecf77a756e",
+                    "path": "<Keyboard>/a",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Steering",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "positive",
+                    "id": "c7e833d6-6d5f-437d-a457-f573d3d9b625",
+                    "path": "<Keyboard>/d",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Steering",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "cee80887-6ea8-42c0-9704-029a8628a7c3",
+                    "path": "<DI_Thrustmaster TMX Racing Wheel>/X",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Steering",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}

@@ -1,5 +1,14 @@
 {
   "dependencies": {
+    "com.mrtimcakes.directinput": {
+      "version": "https://github.com/MrTimcakes/Unity-DirectInput.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {
+        "com.unity.inputsystem": "1.0.2"
+      },
+      "hash": "54ec741cb06e16dad9c96966ca889fdd9167675f"
+    },
     "com.unity.2d.animation": {
       "version": "9.0.4",
       "depth": 1,

@@ -2,9 +2,9 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace DefaultNamespace
+namespace MouseCar
 {
-	public class CarController : MonoBehaviour
+	public class SimpleCarController : MonoBehaviour
 	{
 		[Header("Input")]
 		public InputAction Gas;
