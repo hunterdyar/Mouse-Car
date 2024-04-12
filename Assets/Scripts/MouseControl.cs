@@ -17,6 +17,7 @@ public class MouseControl : MonoBehaviour
 	[DllImport("User32.dll")]
 	static extern bool SetCursorPos(int x, int y);
 
+	public bool enableInEditor = true;
 	private void Start()
 	{
 		_camera = Camera.main;
@@ -27,6 +28,12 @@ public class MouseControl : MonoBehaviour
 	
 	private void Update()
 	{
+		if (!enableInEditor)
+		{
+#if UNITY_EDITOR
+			return;
+#endif
+		}
 		screenPos = ScreenPosition();
 		SetCursorPos(screenPos.x, screenPos.y);
 	
