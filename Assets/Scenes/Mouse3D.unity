@@ -529,9 +529,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: MouseCar
       objectReference: {fileID: 0}
+    - target: {fileID: 3790645462046216010, guid: e565ac6b92da3be4693288ae2e1145a6, type: 3}
+      propertyPath: brakeToReversePoint
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 4224281272596655032, guid: e565ac6b92da3be4693288ae2e1145a6, type: 3}
       propertyPath: enableInEditor
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6958698564316359030, guid: e565ac6b92da3be4693288ae2e1145a6, type: 3}
       propertyPath: m_LocalPosition.x

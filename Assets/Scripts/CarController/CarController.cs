@@ -77,7 +77,13 @@ namespace MouseCar
 			_realBrake = 1-(Mathf.Abs(_brake - brakeToReversePoint)*(1/brakeToReversePoint));
 			LeftWheel.Collider.brakeTorque = _realBrake * brakeTorque;
 			RightWheel.Collider.brakeTorque = _realBrake * brakeTorque;
+			
+			//note; i have a 1- wrong somewhere because this only works at 0.5f right now.
+			brakeToReversePoint = 0.5f;
+			//gotta fix that, but I really  actually using the gear shifter to go into reverse is so funny.
+			
 			_reverse = Mathf.InverseLerp(brakeToReversePoint, 1, _brake);
+
 			if (_reverse > 0 && _throttle < 0.75f)
 			{
 				RightWheel.Collider.motorTorque = _reverse*0.75f*engineTorque;

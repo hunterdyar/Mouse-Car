@@ -87,8 +87,8 @@ MonoBehaviour:
   _centerOfMass: {fileID: 3508989654626079017}
   _clickDownForcePoint: {fileID: 5036174318721271894}
   clickForce: 1200
-  engineTorque: 1000
-  brakeTorque: 600
+  engineTorque: 1500
+  brakeTorque: 800
   brakeToReversePoint: 0.5
 --- !u!114 &2068455203297613083
 MonoBehaviour:
