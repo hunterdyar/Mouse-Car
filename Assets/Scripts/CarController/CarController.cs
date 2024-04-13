@@ -3,7 +3,6 @@ using UnityEngine;
 
 namespace MouseCar
 {
-	
 	public class CarController : MonoBehaviour
 	{
 		public Wheel LeftWheel;
@@ -12,6 +11,8 @@ namespace MouseCar
 		
 		private Rigidbody _rigidbody;
 		[SerializeField] private Transform _centerOfMass;
+		[SerializeField] private Transform _clickDownForcePoint;
+		[SerializeField] private float clickForce;
 		[SerializeField] private float engineTorque;
 		[SerializeField] private float brakeTorque;
 		[SerializeField, Range(0, 1)] private float brakeToReversePoint;
@@ -26,6 +27,21 @@ namespace MouseCar
 			_rigidbody.centerOfMass = _centerOfMass.position;
 		}
 
+		private void OnEnable()
+		{
+			MouseControl.OnClickHappened += MouseControlOnOnClickHappened;
+		}
+
+		private void OnDisable()
+		{
+			MouseControl.OnClickHappened -= MouseControlOnOnClickHappened;
+		}
+
+		private void MouseControlOnOnClickHappened(int button)
+		{
+			_rigidbody.AddForceAtPosition(Vector3.down*clickForce, _clickDownForcePoint.position,ForceMode.Impulse);
+		}
+
 		public void SetThrottle(float throttle)
 		{
 			//lol it's all rigged on -z
@@ -34,7 +50,6 @@ namespace MouseCar
 
 		public void SetBrake(float brake)
 		{
-			
 			_brake = brake;
 		}
 

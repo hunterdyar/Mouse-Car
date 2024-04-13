@@ -3,10 +3,12 @@ using System.Runtime.InteropServices;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
+using Cursor = UnityEngine.UIElements.Cursor;
 
 
 public class MouseControl : MonoBehaviour
 {
+	public static event Action<int> OnClickHappened;
 	private Camera _camera;
 	public InputActionReference LeftClickInput;
 	public InputActionReference RightClickInput;
@@ -20,6 +22,7 @@ public class MouseControl : MonoBehaviour
 	public bool enableInEditor = true;
 	private void Start()
 	{
+		//Cursor.visible = false;
 		_camera = Camera.main;
 		LeftClickInput.action.Enable();
 		RightClickInput.action.Enable();
@@ -58,6 +61,7 @@ public class MouseControl : MonoBehaviour
 				}
 			};
 			Click(down);
+			OnClickHappened?.Invoke(0);
 		}else if (LeftClickInput.action.WasReleasedThisFrame())
 		{
 			INPUT up = new INPUT()
@@ -92,6 +96,7 @@ public class MouseControl : MonoBehaviour
 				}
 			};
 			Click(down);
+			OnClickHappened?.Invoke(0);
 		}
 		else if (RightClickInput.action.WasReleasedThisFrame())
 		{
@@ -115,6 +120,7 @@ public class MouseControl : MonoBehaviour
 	private void Click(INPUT input)
 	{
 		SendInput(2, new INPUT[] { input }, INPUT.Size);
+		
 	}
 
 	Vector2Int ScreenPosition()
